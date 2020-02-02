@@ -16,7 +16,7 @@ class Player extends React.Component {
       }));
     }
 
-    if (e.keyCode == 40 && this.state.top < 98) {
+    if (e.keyCode === 40 && this.state.top < 98) {
       this.setState(prevState => ({
         top: prevState.top + 2
       }));
