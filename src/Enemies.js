@@ -5,7 +5,7 @@ class EnemySource extends React.Component {
   constructor(props) {
     super(props);
 
-    this.MAX_ENEMY_COUNT = 10;
+    this.MAX_ENEMY_COUNT = 20;
     this.state = {
       enemies: []
     };
@@ -14,6 +14,11 @@ class EnemySource extends React.Component {
   componentDidMount() {
     this.creatorTimerId = setInterval(this.createEnemy.bind(this), 2000);
     this.stepTimerId = setInterval(this.step.bind(this), 200);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.creatorTimerId);
+    clearInterval(this.stepTimerId);
   }
 
   createEnemy() {
@@ -49,11 +54,6 @@ class EnemySource extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-    clearInterval(this.creatorTimerId);
-    clearInterval(this.stepTimerId);
-  }
-
   render() {
     return this.state.enemies.map(
       (enemy, index) => <Enemy top={enemy.top} left={enemy.left} key={index} />
@@ -63,8 +63,8 @@ class EnemySource extends React.Component {
 
 function Enemy(props) {
   const enemyStyle = {
-    top: props.top+"%",
-    left: props.left+"%"
+    top: props.top + '%',
+    left: props.left + '%'
   };
   return (
     <div className="enemy" style={enemyStyle}></div>
