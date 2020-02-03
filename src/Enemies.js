@@ -5,7 +5,7 @@ class EnemySource extends React.Component {
   constructor(props) {
     super(props);
 
-    const maxEnemyCount = 10;
+    this.MAX_ENEMY_COUNT = 10;
     this.state = {
       enemies: []
     };
@@ -17,14 +17,18 @@ class EnemySource extends React.Component {
   }
 
   createEnemy() {
-    if (!this.maxEnemyCount || this.state.enemies.length < this.maxEnemyCount) {
-      let top = Math.floor(Math.random() * 10) * 10;
+    if (!this.MAX_ENEMY_COUNT || this.state.enemies.length < this.MAX_ENEMY_COUNT) {
+      const top = Math.floor(Math.random() * 10) * 10;
+      const leftToRight = Math.random() < 0.5
+
+      const newEnemy = {
+        top: top,
+        leftToRight: leftToRight,
+        left: leftToRight ? 0 : 100
+      }
       
       this.setState(prevState => ({
-        enemies: [
-          ...prevState.enemies, 
-          {top: top, left: 0}
-        ]
+        enemies: [...prevState.enemies, newEnemy]
       }));
     }
   }
@@ -34,10 +38,10 @@ class EnemySource extends React.Component {
       const enemies = _.map(
         _.filter(
           prevState.enemies, 
-          (enemy) => (enemy.left < 100)
+          (enemy) => (0 <= enemy.left && enemy.left <= 100)
         ), 
         (enemy) => {
-          enemy.left += 1;
+          enemy.left += enemy.leftToRight ? 1 : -1;
           return enemy;
         });
 
