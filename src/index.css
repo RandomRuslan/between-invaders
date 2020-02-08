@@ -1,1 +1,43 @@
-body {}
+body {
+    background-color: pink;
+}
+
+html, body, #root {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.board {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+   
+.player {
+    position: absolute;
+    background-color: chartreuse;
+    width: 50px;
+    height: 50px;
+    left: 50%;       
+    top: 50%;  
+    transform: translate(-50%, -50%);
+}
+
+.bullet {
+    position: absolute;
+    background-color: blue;
+    width: 5px;
+    height: 5px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+   
+.enemy {
+    position: absolute;
+    background-color: red;
+    width: 5%;
+    height: 5%;  
+    transform: translate(-50%, -50%);
+}
